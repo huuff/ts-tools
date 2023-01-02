@@ -1,4 +1,4 @@
-import { keys } from "./typesafe";
+import { keys, capitalize } from "./typesafe";
 
 describe("typesafe", () => {
     describe("keys", () => {
@@ -14,6 +14,19 @@ describe("typesafe", () => {
 
             // ASSERT
             expect(objKeys).toEqual(["key1", "key2"]);
+        });
+    });
+
+    describe("capitalize", () => {
+        test("correctly capitalizes", () => {
+            // ARRANGE
+            const input = "input";
+
+            // ACT
+            const output = capitalize(input);
+
+            // ASSERT
+            expect(output).toBe("Input");
         });
     });
 });

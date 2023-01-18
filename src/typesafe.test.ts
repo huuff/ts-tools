@@ -1,4 +1,4 @@
-import { keys, capitalize } from "./typesafe";
+import { keys, capitalize, isNotNullable } from "./typesafe";
 
 describe("typesafe", () => {
     describe("keys", () => {
@@ -28,5 +28,16 @@ describe("typesafe", () => {
             // ASSERT
             expect(output).toBe("Input");
         });
+    });
+
+    describe("isNotNullable", () => {
+        // ARRANGE
+        const input = [ "v1", null, "v2", undefined, "v3"];
+
+        // ACT
+        const output = input.filter(isNotNullable);
+
+        // ASSERT
+        expect(output).toEqual(["v1", "v2", "v3"]);
     });
 });

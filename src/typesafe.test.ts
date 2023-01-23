@@ -46,10 +46,10 @@ describe("typesafe", () => {
     describe("switchExpr", () => {
         test("returns appropriate branch", () => {
             // ARRANGE
-            const input: 1 | 2 | 3 = 2;
+            const input: number = 2;
 
             // ACT
-            const output = switchExpr<1 | 2 | 3, string>(input, {
+            const output = switchExpr(input, {
                 1: "output1",
                 2: "output2",
                 default: "output3",

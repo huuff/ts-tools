@@ -1,4 +1,4 @@
-import { keys, capitalize, isNotNullable } from "./typesafe";
+import { keys, capitalize, isNotNullable, switchExpr } from "./typesafe";
 
 describe("typesafe", () => {
     describe("keys", () => {
@@ -31,13 +31,32 @@ describe("typesafe", () => {
     });
 
     describe("isNotNullable", () => {
-        // ARRANGE
-        const input = [ "v1", null, "v2", undefined, "v3"];
+        test("filters non-nullables", () => {
+            // ARRANGE
+            const input = ["v1", null, "v2", undefined, "v3"];
 
-        // ACT
-        const output = input.filter(isNotNullable);
+            // ACT
+            const output = input.filter(isNotNullable);
 
-        // ASSERT
-        expect(output).toEqual(["v1", "v2", "v3"]);
+            // ASSERT
+            expect(output).toEqual(["v1", "v2", "v3"]);
+        });
+    });
+
+    describe("switchExpr", () => {
+        test("returns appropriate branch", () => {
+            // ARRANGE
+            const input: 1 | 2 | 3 = 2;
+
+            // ACT
+            const output = switchExpr<1 | 2 | 3, string>(input, {
+                1: "output1",
+                2: "output2",
+                default: "output3",
+            })
+
+            // ASSERT
+            expect(output).toBe("output2")
+        });
     });
 });
